@@ -93,8 +93,8 @@
             }
 
             app.ws.onmessage = function (event) {
-                var res = JSON.parse(event.data)
-                var messsage = ''
+                let res = JSON.parse(event.data);
+                let messsage = '';
                 if (res.Type === 'New User') {
                     message = 'User <b>' + res.From + '</b>: connected'
                 } else if (res.Type === 'Leave') {

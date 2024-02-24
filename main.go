@@ -10,8 +10,6 @@ import (
 	"strings"
 )
 
-type M map[string]interface{}
-
 const MESSAGE_NEW_USER = "New User"
 const MESSAGE_CHAT = "Chat"
 const MESSAGE_LEAVE = "Leave"
@@ -51,7 +49,7 @@ func main() {
 		currentConn := WebSocketConnection{Conn: currentGorillaConn, Username: username}
 		connections = append(connections, &currentConn)
 
-		go handleIO(&currentConn, connections)
+		go handleIO(&currentConn)
 	})
 
 	fmt.Println("Server running on localhost:8080")
@@ -59,7 +57,7 @@ func main() {
 
 }
 
-func handleIO(currentConn *WebSocketConnection, connections []*WebSocketConnection) {
+func handleIO(currentConn *WebSocketConnection) {
 	defer func() {
 		if r := recover(); r != nil {
 			log.Println("ERROR", fmt.Sprintf("%v", r))
